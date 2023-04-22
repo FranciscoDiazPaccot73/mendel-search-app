@@ -18,9 +18,9 @@ const Card: FC<BookProps> = ({ book }) => {
   return (
     <Link
       href={`${key}?author=${authorId}`}
-      className="h-38 grid grid-cols-content overflow-hidden gap-3 group rounded-lg border border-transparent px-2 py-3 transition-colors bg-light-secondary dark:bg-dark-secondary md:hover:border-gray-300 md:hover:bg-gray-100 md:hover:dark:border-neutral-700 md:hover:dark:bg-neutral-800/30 md:hover:scale-105"
+      className="h-38 grid grid-cols-content overflow-hidden gap-3 group rounded-lg border border-transparent px-2 py-3 transition-colors bg-light-secondary dark:bg-dark-secondary md:hover:border-gray-300 md:hover:bg-gray-100 md:hover:dark:border-neutral-700 md:hover:dark:bg-neutral-800/30"
     >
-      <aside className="w-20 flex flex-col items-center">
+      <aside className="w-20 flex flex-col items-center min-h-[110px]">
         <Image alt={title} src={coverImgUrl} width={70} height={120} />
       </aside>
       <aside className="overflow-hidden">

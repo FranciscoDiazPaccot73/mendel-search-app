@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, FC } from "react";
+import { useState, useContext, FC } from "react";
 
 import { PageContext } from "@store/index";
 import { searchBooks } from "@store/actions";
@@ -7,13 +7,9 @@ type SearchBarProps = {
   defaultSearch?: string
 }
 
-const SearchBar: FC<SearchBarProps> = ({ defaultSearch = '' }) => {
+const SearchBar: FC<SearchBarProps> = ({ defaultSearch }) => {
   const { dispatch, state: { isFetching } } = useContext(PageContext);
-  const [inputValue, setValue] = useState<string>(defaultSearch);
-
-  useEffect(() => {
-
-  }, [])
+  const [inputValue, setValue] = useState<string>(defaultSearch ?? '');
 
   const handleChange = (e: { target: { value: string }; }) => {
     const { value } = e.target;
@@ -41,10 +37,16 @@ const SearchBar: FC<SearchBarProps> = ({ defaultSearch = '' }) => {
           onKeyUp={searchOnEnter}
           onChange={handleChange}
           placeholder="Nombre del libro"
-          className="text-black h-8 w-full pl-3 pr-16 overflow-hidden rounded-full"
+          className="h-10 w-full pl-4 pr-16 overflow-hidden rounded-full dark:bg-dark-secondary dark:text-white"
           type="text"
         />
-        <button disabled={isFetching} onClick={handleSearch} className="absolute right-12 top-1/2 -translate-y-1/2">Buscar</button>
+        <button
+          disabled={isFetching}
+          onClick={handleSearch}
+          className="absolute h-full px-2 right-10 top-1/2 -translate-y-1/2 border-l rounded-br-full rounded-tr-full border-light-secondary border-opacity-30 md:hover:dark:bg-dark-main"
+        >
+          Buscar
+        </button>
       </div>
     </header>
   )

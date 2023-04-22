@@ -13,3 +13,9 @@ export const getCoverImageUrl = (id?: number) => {
 
   return `${COVER_URL}${id}${COVER_M}`
 }
+
+const encodeUrl = (value: string) => value.replaceAll(' ', '+');
+
+export const updateUri = (values: string) => {
+  window.history.replaceState({}, '', `?q=${encodeUrl(values)}`)
+}
