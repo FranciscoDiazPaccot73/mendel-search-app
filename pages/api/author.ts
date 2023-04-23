@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios';
-import queryString from 'query-string';
-
-import { DEFAULT_LIMIT } from '@/utils/constants';
 
 const { OL_BASE_URL } = process.env;
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import { DEFAULT_LIMIT } from '@/utils/constants';
-import { extractCriticalInfo } from '@/services';
+import { extractCriticalInfo } from '@/utils';
 
 const { OL_BASE_URL } = process.env;
 

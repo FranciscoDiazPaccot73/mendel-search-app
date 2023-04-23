@@ -13,8 +13,8 @@ export const infiniteScrollFetching = (dispatch: React.Dispatch<any>, value: boo
   dispatch({ type: types.SET_INFINITE_SCROLL_FETCHING, value });
 };
 
-export const setInitialValues = (dispatch: React.Dispatch<any>, search: string, content: ServerSideProps | {}) => {
-  dispatch({ type: types.SET_INPUT_VALUE, searchValue: search });
+export const setInitialValues = (dispatch: React.Dispatch<any>, search?: string, content?: ServerSideProps | {}) => {
+  if (search) dispatch({ type: types.SET_INPUT_VALUE, searchValue: search });
   dispatch({ type: types.SET_CONTENT, content });
 }
 
