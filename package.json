@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "author": {
+    "name": "Francisco Diaz Paccot",
+    "email": "fran.diazpaccot@gmail.com",
+    "url": "https://www.franciscodiazpaccot.dev/"
+  },
   "dependencies": {
     "@types/node": "18.15.13",
     "@types/react": "18.0.37",
