@@ -29,21 +29,22 @@ const SearchBar: FC<SearchBarProps> = ({ defaultSearch }) => {
   }
 
   return (
-    <header className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit">
+    <header className="fixed left-0 top-0 flex w-full justify-center border-b bg-gradient-to-b pb-6 pt-8 backdrop-blur-2xl border-neutral-800 bg-zinc-800/30 from-inherit">
       <div className="max-w-6xl mx-auto px-10 w-full relative">
         <input
+          id="search-input"
           disabled={isFetching}
           value={inputValue}
           onKeyUp={searchOnEnter}
           onChange={handleChange}
           placeholder="Nombre del libro"
-          className="h-10 w-full pl-4 pr-16 overflow-hidden rounded-full dark:bg-dark-secondary dark:text-white"
+          className="h-10 w-full pl-4 pr-16 overflow-hidden rounded-full bg-dark-secondary text-white"
           type="text"
         />
         <button
           disabled={isFetching}
           onClick={handleSearch}
-          className="absolute h-full px-2 right-10 top-1/2 -translate-y-1/2 border-l rounded-br-full rounded-tr-full border-light-secondary border-opacity-30 md:hover:dark:bg-dark-main"
+          className="absolute h-full px-2 right-10 top-1/2 -translate-y-1/2 border-l rounded-br-full rounded-tr-full border-light-secondary border-opacity-30 md:hover:bg-dark-main"
         >
           Buscar
         </button>

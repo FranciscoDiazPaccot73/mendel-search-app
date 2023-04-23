@@ -1,24 +1,42 @@
-import { FC } from "react";
-import Link from "next/link";
+import { FC, useEffect, useRef } from "react";
 import Image from "next/image";
-import { BookCriticalInfoClient } from "@/pages/types";
-import { getCoverImageUrl } from "@/utils";
+
+import { BookCriticalInfoClient } from "@pages/types";
+import { getCoverImageUrl } from "@utils/index";
 
 type BookProps = {
   book: BookCriticalInfoClient
+  next: () => void
+  isLast: boolean
+  onExpand: (book: BookCriticalInfoClient, coverImage: string) => void
 }
 
-const Card: FC<BookProps> = ({ book }) => {
-  const { author, authorId, cover, key, publish, title } = book;
+const Card: FC<BookProps> = ({ book, isLast, next, onExpand }) => {
+  const { author, cover, key, publish, title } = book;
+  const cardRef = useRef(null);
 
   if (!title) return null;
+
+  useEffect(() => {
+    if (!cardRef?.current) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (isLast && entry.isIntersecting) {
+        next();
+        observer.unobserve(entry.target);
+      }
+    });
+
+    observer.observe(cardRef.current);
+  }, [isLast]);
 
   const coverImgUrl = getCoverImageUrl(cover);
 
   return (
-    <Link
-      href={`${key}?author=${authorId}`}
-      className="h-38 grid grid-cols-content overflow-hidden gap-3 group rounded-lg border border-transparent px-2 py-3 transition-colors bg-light-secondary dark:bg-dark-secondary md:hover:border-gray-300 md:hover:bg-gray-100 md:hover:dark:border-neutral-700 md:hover:dark:bg-neutral-800/30"
+    <div
+      onClick={() => onExpand(book, coverImgUrl)}
+      ref={cardRef}
+      className="cursor-pointer h-38 grid grid-cols-content overflow-hidden gap-3 group rounded-lg border border-transparent px-2 py-3 transition-colors bg-dark-secondary md:hover:bg-gray-100 md:hover:border-neutral-700 md:hover:bg-neutral-800/30"
     >
       <aside className="w-20 flex flex-col items-center min-h-[110px]">
         <Image alt={title} src={coverImgUrl} width={70} height={120} />
@@ -38,7 +56,7 @@ const Card: FC<BookProps> = ({ book }) => {
           </p>
         ) : null}
       </aside>
-    </Link>
+    </div>
   )
 }
 

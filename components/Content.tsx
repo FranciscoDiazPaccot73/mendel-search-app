@@ -1,14 +1,15 @@
-import { useContext, FC } from 'react';
-import { motion } from 'framer-motion';
+import { useContext, FC, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import InfiniteScroll from 'react-infinite-scroll-component';
-import Card from '@components/Card';
+import Card from './Card';
+import Modal from './ModalInfo';
 import Spinner from './Spinner';
 
 import { DEFAULT_LIMIT } from '@utils/constants';
 import { PageContext } from '@store/index';
 import { getMoreBooks } from '@store/actions';
 import { BookCriticalInfoClient } from '@/pages/types';
+import { ContentWithImage } from './ModalInfo';
 
 type ContentProps = {
   books: BookCriticalInfoClient[]
@@ -16,38 +17,46 @@ type ContentProps = {
 }
 
 const Content: FC<ContentProps> = ({ books, totalBooks }) => {
-  const { dispatch, state: { isFetching, currentPage = 1, searchValue } } = useContext(PageContext);
-
+  const { dispatch, state: { isFetching, currentPage = 1, searchValue, isISFetching } } = useContext(PageContext);
+  const [selectedBook, setSelectedBook] = useState<ContentWithImage | null>();
   const hasMore = totalBooks ? DEFAULT_LIMIT * currentPage < totalBooks : false;
 
   const getMorePost = () => {
-    console.log("llegamos hasta aca?")
-    if (totalBooks) {
-      getMoreBooks(dispatch, currentPage, searchValue)
+    if (totalBooks && hasMore) {
+      const inputElem = document.getElementById('search-input') as HTMLInputElement;
+      const inputValue = searchValue ?? inputElem?.value;
+      getMoreBooks(dispatch, currentPage, inputValue)
     }
   };
 
-  console.log(hasMore)
+  const onExpand = (book: BookCriticalInfoClient, coverImage: string) => {
+    setSelectedBook({ ...book, coverImage })
+  }
+  
+  const handleResetModal = () => {
+    setSelectedBook(null);
+  }
 
   return (
-    <motion.div
-      animate={{
-        scale: isFetching ? 0.95 : 1,
-        opacity: isFetching ? 0.5 : 1
-      }}
-      transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-    >
-      <InfiniteScroll
-        dataLength={books.length}
-        className='grid gap-6 text-center md:grid-cols-cards'
-        next={getMorePost}
-        hasMore={hasMore}
-        loader={<Spinner />}
-        scrollableTarget="main-container"
+    <div className='relative'>
+      <motion.div
+        animate={{
+          scale: isFetching || selectedBook ? 0.95 : 1,
+          opacity: isFetching || selectedBook ? 0.5 : 1
+        }}
+        transition={{ type: "spring", bounce: 0, duration: 0.4 }}
       >
-        {books?.map((book: BookCriticalInfoClient) => <Card key={book.key} book={book} />)}
-      </InfiniteScroll>
-    </motion.div>
+        <AnimatePresence>
+          <div className='grid gap-6 text-center md:grid-cols-cards'>
+            {books?.map((book: BookCriticalInfoClient, index: number) => (
+              <Card key={book.key} book={book} isLast={index === books.length - 1} next={getMorePost} onExpand={onExpand} />
+            ))}
+          </div>
+        </AnimatePresence>
+        {isISFetching ? <Spinner /> : null}
+      </motion.div>
+      <Modal content={selectedBook} resetModal={handleResetModal} />
+    </div>
   )
 }
 
