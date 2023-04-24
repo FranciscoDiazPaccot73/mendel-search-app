@@ -1,7 +1,7 @@
 # Challenge tecnico para Mendel.
 Autor: **[Francisco Diaz Paccot](https://franciscodiazpaccot.dev)**.
 
-## [Live Demo](https://fdiazpaccot-strike-todo-app.vercel.app/)
+## [Live Demo](https://mendel-search-app.vercel.app/)
 
 ## Tecnologias usadas.
 Para este challenge tecnico se utilizo **NextJs, Tailwind, Typescript, ReactJs, NodeJs**
