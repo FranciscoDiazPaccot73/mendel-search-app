@@ -1,4 +1,4 @@
-import { BookCriticalInfo } from "@/pages/types";
+import { BookCriticalInfo, BookCriticalInfoClient } from "@pages/types";
 
 const COVER_URL = 'https://covers.openlibrary.org/b/id/'
 const COVER_S = '-S.jpg';
@@ -45,3 +45,5 @@ export const extractCriticalInfo = (arrayOfBooks: BookCriticalInfo[]) => {
     return ({ key, title, publish, author, authorId, cover })
   })
 }
+
+export const getBooksToShow = (books: BookCriticalInfoClient[]) => books?.filter((book: BookCriticalInfoClient) => book.title && book.author)

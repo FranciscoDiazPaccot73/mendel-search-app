@@ -12,10 +12,10 @@ type BookProps = {
 }
 
 const Card: FC<BookProps> = ({ book, isLast, next, onExpand }) => {
-  const { author, cover, key, publish, title } = book;
+  const { author, cover, publish, title } = book;
   const cardRef = useRef(null);
 
-  if (!title) return null;
+  if (!title || !author) return null;
 
   useEffect(() => {
     if (!cardRef?.current) return;

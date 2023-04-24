@@ -3,7 +3,6 @@ import { types } from './reducers';
 import { searchBookService, getBook, getAuthor } from '@services/index';
 import { updateUri } from '@utils/index';
 import { DEFAULT_LIMIT } from '@utils/constants';
-import { ServerSideProps } from '@/pages';
 
 export const isFetching = (dispatch: React.Dispatch<any>, value: boolean) => {
   dispatch({ type: types.FETCHING, value });
@@ -13,8 +12,14 @@ export const infiniteScrollFetching = (dispatch: React.Dispatch<any>, value: boo
   dispatch({ type: types.SET_INFINITE_SCROLL_FETCHING, value });
 };
 
-export const setInitialValues = (dispatch: React.Dispatch<any>, search?: string, content?: ServerSideProps | {}) => {
+export const setInitialValues = (dispatch: React.Dispatch<any>, search?: string, content?: any) => {
   if (search) dispatch({ type: types.SET_INPUT_VALUE, searchValue: search });
+  if (content?.type === 'trendings') dispatch({ type: types.SET_TRENDINGS, content });
+  dispatch({ type: types.SET_CONTENT, content });
+}
+
+export const setContent = (dispatch: React.Dispatch<any>, content?: any) => {
+  dispatch({ type: types.SET_INPUT_VALUE, searchValue: null });
   dispatch({ type: types.SET_CONTENT, content });
 }
 

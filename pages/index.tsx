@@ -63,7 +63,6 @@ const Home: NextPage<HomeProps> = ({ initialSearchValue, q }) => {
         <meta name="title" content={META.TITLE} />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      {isLoading ? <Loader top='top-48' /> : null}
       <section className="z-30 w-full max-w-5xl items-center justify-between font-mono text-sm">
         <SearchBar defaultSearch={initialSearchValue} />
         <Footer />
@@ -77,8 +76,8 @@ const Home: NextPage<HomeProps> = ({ initialSearchValue, q }) => {
       ) : null}
       <section className="relative w-full mb-32">
         {books && <Content books={books} totalBooks={totalBooks} />}
-        {isFetching ? <Loader /> : null}
       </section>       
+      {isFetching || isLoading ? <Loader /> : null}
     </div>
   )
 }

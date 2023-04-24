@@ -14,7 +14,7 @@ const Author = ({ author, name }: any) => {
   
     if (!author.bio) return <p>No hay informacion sobre este autor.</p>;
   
-    return author?.bio
+    return author?.bio?.value ?? author?.bio
   }
 
   return (

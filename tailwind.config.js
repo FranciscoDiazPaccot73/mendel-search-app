@@ -10,6 +10,9 @@ module.exports = {
       maxHeight: {
         'modal-dialog': 'calc(100vh - 300px)',
       },
+      width: {
+        'input-40': 'calc(100% - 2.5rem)'
+      },
       colors: {
         'skeleton': '#53535e50',
         dark: {

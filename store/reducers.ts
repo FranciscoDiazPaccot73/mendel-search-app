@@ -5,6 +5,7 @@ export const types = {
   SET_INPUT_VALUE: 'set/INPUT_VALUE',
   SET_CURRENT_PAGE: 'set/CURRENT_PAGE',
   SET_AUTHOR: 'set/AUTHOR',
+  SET_TRENDINGS: 'set/TRENDINGS',
   SET_BOOK_INFO: 'set/BOOK_INFO',
   UPDATE_CONTENT: 'update/CONTENT',
 };
@@ -19,6 +20,9 @@ export const reducer = (state: any, action: any) => {
   switch (action.type) {
     case types.FETCHING: {
       return {...state, isFetching: action.value}
+    }
+    case types.SET_TRENDINGS: {
+      return {...state, trendings: action.content}
     }
     case types.SET_INFINITE_SCROLL_FETCHING: {
       return {...state, isISFetching: action.value}

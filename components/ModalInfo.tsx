@@ -8,7 +8,6 @@ import Author from "./Author";
 import { BookCriticalInfoClient } from "@pages/types";
 import { PageContext } from "@store/index";
 import { getBookAction, resetModalValues, getAuthorAction } from "@store/actions";
-import { getCoverImageUrl } from "@/utils";
 
 export interface ContentWithImage extends BookCriticalInfoClient {
   coverImage: string
@@ -71,7 +70,7 @@ const Modal: FC<ModalProps> = ({ content, resetModal }) => {
                 <aside className="w-full">
                   <p className="w-full text-center font-bold text-xl mb-3 text-white hidden md:block">{content.title}</p>
                   <p className="m-0 text-sm w-full text-start font-bold mb-5">
-                    Primera publicacion: <span className="opacity-50 font-normal">{content.publish}</span>
+                    Primera publicacion: <span className="opacity-50 font-normal">{content.publish ?? '-'}</span>
                   </p>
                   <p>
                     <Image
