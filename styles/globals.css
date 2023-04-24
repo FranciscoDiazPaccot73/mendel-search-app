@@ -5,12 +5,12 @@
 :root {
   --theme-dark: #11111a;
   --theme-light: #cfcfcf;
-  --hue: 275;
+  --hue: 0;
   --bg: hsl(var(--hue), 10%, 90%);
   --fg: hsl(var(--hue), 10%, 10%);
-  --primary: hsl(var(--hue), 90%, 55%);
-  --primary-l: hsl(var(--hue), 90%, 65%);
-  --primary-d: hsl(var(--hue), 90%, 45%);
+  --primary: hsl(var(--hue), 0%, 55%);
+  --primary-l: hsl(var(--hue), 0%, 65%);
+  --primary-d: hsl(var(--hue), 0%, 45%);
   --white: hsl(var(--hue), 10%, 100%);
   --white-d: hsl(var(--hue), 10%, 45%);
 }
